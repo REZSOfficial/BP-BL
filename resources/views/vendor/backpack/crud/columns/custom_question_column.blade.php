@@ -16,8 +16,8 @@ $questions = $entry->questions->pluck('question', 'id')->toArray();
                 </a>
             </li>
             @endforeach
-            <li class="dropdown-item w-full fw-bold mt-2">
-                <a href="{{route('question.create')}}">Add Question</a>
+            <li>
+                <a class="btn btn-dark w-100" href="{{route('question.create')}}">Add Question</a>
             </li>
         </ul>
     </div>

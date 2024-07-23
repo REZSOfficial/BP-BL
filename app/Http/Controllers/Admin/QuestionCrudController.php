@@ -29,6 +29,8 @@ class QuestionCrudController extends CrudController
         CRUD::setModel(\App\Models\Question::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/question');
         CRUD::setEntityNameStrings('question', 'questions');
+
+        CRUD::setCreateView('vendor.backpack.crud.question.create');
     }
 
     /**
@@ -39,8 +41,16 @@ class QuestionCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        //CRUD::setFromDb(); // set columns from db columns.
-        CRUD::column('question_set')->type('text');
+        $this->crud->addColumn([
+            // 1-n relationship
+            'label' => "Question Set", // Table column heading
+            'type' => "select",
+            'name' => 'quesiton_set_id', // the column that contains the ID of that connected entity;
+            'entity' => 'questionSet', // the method that defines the relationship in your Model
+            'attribute' => "title", // foreign key attribute that is shown to user
+            'model' => "App\Models\QuestionSet", // foreign key model
+        ]);
+        CRUD::setFromDb(); // set columns from db columns.
     }
 
     /**
@@ -52,12 +62,24 @@ class QuestionCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(QuestionRequest::class);
-        CRUD::setFromDb(); // set fields from db columns.
 
-        /**
-         * Fields can be defined using the fluent syntax:
-         * - CRUD::field('price')->type('number');
-         */
+        CRUD::field([
+            'name' => 'questionset_id',
+            'type' => 'select',
+            'label' => 'Question Set',
+            'entity' => 'questionset',
+            'model' => "App\Models\QuestionSet",
+            'attribute' => 'title',
+            'options'   => (function ($query) {
+                return $query->orderBy('title', 'ASC')->get();
+            }),
+        ]);
+
+        CRUD::field([
+            'name' => 'question',
+            'type' => 'text',
+            'label' => 'Question',
+        ]);
     }
 
     /**

@@ -26,7 +26,7 @@ $breadcrumbs = $breadcrumbs ?? $defaultBreadcrumbs;
 		</p>
 		@endif
 	</section>
-	<a href="javascript: window.print();" class="btn float-end float-right"><i class="la la-print"></i></a>
+	<a href="javascript: window.print();" class="btn float-end"><i class="la la-print"></i></a>
 </div>
 @endsection
 

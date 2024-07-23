@@ -31,6 +31,18 @@ class QuestionSetCrudController extends CrudController
         CRUD::setEntityNameStrings('question set', 'question sets');
 
         CRUD::setListView('vendor.backpack.crud.questionset.list');
+        CRUD::setShowView('vendor.backpack.crud.questionset.show');
+    }
+
+    protected function setupShowOperation()
+    {
+        $this->autoSetupShowOperation();
+
+        CRUD::addColumn([
+            'name' => 'questions',
+            'label' => 'Questions',
+            'type' => 'custom_question_table',
+        ]);
     }
 
     /**
