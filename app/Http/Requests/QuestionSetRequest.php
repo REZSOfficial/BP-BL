@@ -25,7 +25,15 @@ class QuestionSetRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'title' => 'required|max:255',
+            'description' => 'required|max:255',
+            'active_from' => 'date|nullable',
+            'active_to' => 'date|nullable',
+            'questions' => 'array',
+            'questions.*.question' => 'required|string',
+            'questions.*.answers' => 'array',
+            'questions.*.answers.*.answer' => 'required|string',
+            'questions.*.answers.*.is_correct' => 'boolean',
         ];
     }
 
@@ -49,7 +57,12 @@ class QuestionSetRequest extends FormRequest
     public function messages()
     {
         return [
-            //
+            'title.required' => 'Cím megadása kötelező.',
+            'description.required' => 'Leírás megadása kötelező.',
+            'title.max' => 'A cím túl hosszú.',
+            'description.max' => 'A cím túl hosszú.',
+            'questions.*.question.required' => 'Kérdések megadása kötelező.',
+            'questions.*.answers.*.answer.required' => 'Válaszok megadása kötelező.',
         ];
     }
 }

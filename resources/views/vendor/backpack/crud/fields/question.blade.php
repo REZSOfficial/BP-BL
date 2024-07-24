@@ -8,10 +8,12 @@
         <div class="card">
             <div class="card-header">Válaszok</div>
             <div class="card-body" id="answers-wrapper-{{ $index }}">
+                @if (isset($question['answers']) && is_array($question['answers']))
                 @foreach ($question['answers'] as $answerIndex => $answer)
                 @include('vendor.backpack.crud.fields.answer', ['qIndex' => $index, 'index' => $answerIndex, 'answer' =>
                 $answer])
                 @endforeach
+                @endif
             </div>
             <button type="button" class="btn btn-secondary add-answer mb-2" data-qindex="{{ $index }}">Válasz
                 hozzáadása</button>

@@ -90,6 +90,8 @@ class QuestionSetCrudController extends CrudController
             'type' => 'questions',
             'label' => 'Kérdések'
         ]);
+
+        CRUD::setValidation(QuestionSetRequest::class);
     }
 
     /**
@@ -107,11 +109,10 @@ class QuestionSetCrudController extends CrudController
     {
         $this->crud->hasAccessOrFail('create');
 
+        $request = app(QuestionSetRequest::class);
         $request = $this->crud->getRequest();
-        $questionsData = $request->get('questions', []);
 
-        // Validate request data
-        //$this->validate($request, QuestionSetRequest::class);
+        $questionsData = $request->get('questions', []);
 
         // Create question set
         $questionSet = QuestionSet::create([
