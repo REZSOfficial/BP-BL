@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Answer;
 use App\Models\Question;
 use App\Models\QuestionSet;
-use Illuminate\Http\Request;
 use App\Http\Requests\QuestionSetRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -36,7 +35,6 @@ class QuestionSetCrudController extends CrudController
 
         CRUD::setListView('vendor.backpack.crud.questionset.list');
         CRUD::setShowView('vendor.backpack.crud.questionset.show');
-        //CRUD::setCreateView('vendor.backpack.crud.questionset.create');
     }
 
     protected function setupShowOperation()
@@ -45,7 +43,7 @@ class QuestionSetCrudController extends CrudController
 
         CRUD::addColumn([
             'name' => 'questions',
-            'label' => 'Questions',
+            'label' => 'Kérdések',
             'type' => 'custom_question_table',
         ]);
     }
@@ -60,14 +58,14 @@ class QuestionSetCrudController extends CrudController
     {
         //CRUD::setFromDb(); // set columns from db columns.
 
-        CRUD::column('title')->type('text');
-        CRUD::column('description')->type('text');
-        CRUD::column('active_from')->type('date');
-        CRUD::column('active_to')->type('date');
+        CRUD::column('title')->type('text')->label('Név');
+        CRUD::column('description')->type('text')->label('Leírás');
+        CRUD::column('active_from')->type('date')->label('Aktív ettől');
+        CRUD::column('active_to')->type('date')->label('Aktív eddig');
 
         CRUD::addColumn([
             'name' => 'questions',
-            'label' => 'Questions',
+            'label' => 'Kérdések',
             'type' => 'custom_question_column',
         ]);
     }
@@ -81,18 +79,17 @@ class QuestionSetCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(QuestionSetRequest::class);
-        CRUD::setFromDb(); // set fields from db columns.
+
+        CRUD::field('title')->label('Cím');
+        CRUD::field('description')->label('Leírás');
+        CRUD::field('active_from')->label('Aktív dátumtól')->type('date');
+        CRUD::field('active_to')->label('Aktív dátumig')->type('date');
 
         CRUD::addField([
             'name' => 'questions',
             'type' => 'questions',
-            'label' => 'Questions'
+            'label' => 'Kérdések'
         ]);
-
-        /**
-         * Fields can be defined using the fluent syntax:
-         * - CRUD::field('price')->type('number');
-         */
     }
 
     /**

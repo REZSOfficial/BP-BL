@@ -12,7 +12,7 @@ $questions = $entry->questions;
                 </a>
             </th>
             <th>
-                Correct
+                Helyes
             </th>
         </tr>
     </thead>

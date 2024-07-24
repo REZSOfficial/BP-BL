@@ -1,23 +1,24 @@
 @php
-$questions = $entry->questions->pluck('question', 'id')->toArray();
+$answers = $entry->answers;
 @endphp
 
 <span class="d-flex flex-row">
 
     <div class="dropdown">
         <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Kérdések
+            Válaszok
         </button>
         <ul class="dropdown-menu">
-            @foreach($questions as $id => $question)
+            @foreach($answers as $id => $answer)
             <li class="dropdown-item">
-                <a href="{{route('question.show', $id)}}">
-                    {{ $question }}
+                <a href="{{route('answer.show', $id)}}">
+                    {{ $answer->answer }}
                 </a>
             </li>
             @endforeach
             <li>
-                <a class="btn btn-dark w-100" href="{{route('question.create')}}">Kérdés hozzáadása</a>
+                <a class="btn btn-dark w-100"
+                    href="{{route('question-set.edit', $answer->question->question_set_id)}}">Módosítás</a>
             </li>
         </ul>
     </div>

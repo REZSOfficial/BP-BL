@@ -4,14 +4,14 @@ $questions = old('questions', $entry->questions ?? []);
 @endphp
 
 <div class="card">
-    <div class="card-header">Questions</div>
+    <div class="card-header">Kérdések</div>
     <div class="card-body">
         <div id="questions-wrapper">
             @foreach ($questions as $index => $question)
             @include('vendor.backpack.crud.fields.question', ['index' => $index, 'question' => $question])
             @endforeach
         </div>
-        <button type="button" class="btn btn-secondary" id="add-question">Add Question</button>
+        <button type="button" class="btn btn-secondary" id="add-question">Kérdés hozzáadása</button>
     </div>
 </div>
 

@@ -41,16 +41,26 @@ class QuestionCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        $this->crud->addColumn([
-            // 1-n relationship
-            'label' => "Question Set", // Table column heading
+        CRUD::addColumn([
+            'label' => "Kérdéssor",
             'type' => "select",
-            'name' => 'quesiton_set_id', // the column that contains the ID of that connected entity;
-            'entity' => 'questionSet', // the method that defines the relationship in your Model
-            'attribute' => "title", // foreign key attribute that is shown to user
-            'model' => "App\Models\QuestionSet", // foreign key model
+            'name' => 'quesiton_set_id',
+            'entity' => 'questionSet',
+            'attribute' => "title",
+            'model' => "App\Models\QuestionSet",
         ]);
-        CRUD::setFromDb(); // set columns from db columns.
+
+        CRUD::addColumn([
+            'name' => 'question',
+            'type' => 'Kérdés',
+            'label' => 'Question',
+        ]);
+
+        CRUD::addColumn([
+            'name' => 'answers',
+            'label' => 'Válaszok',
+            'type' => 'custom_answer_column',
+        ]);
     }
 
     /**
