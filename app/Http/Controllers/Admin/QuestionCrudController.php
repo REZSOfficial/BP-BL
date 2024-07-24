@@ -63,8 +63,8 @@ class QuestionCrudController extends CrudController
     {
         CRUD::setValidation(QuestionRequest::class);
 
-        CRUD::field([
-            'name' => 'questionset_id',
+        CRUD::addField([
+            'name' => 'question_set_id',
             'type' => 'select',
             'label' => 'Question Set',
             'entity' => 'questionset',

@@ -22,7 +22,7 @@ return [
      * Possible values: horizontal, horizontal_dark, horizontal_overlap, vertical,
      * vertical_dark, vertical_transparent (legacy theme), right_vertical, right_vertical_dark, right_vertical_transparent
      */
-    'layout' => 'horizontal_overlap',
+    'layout' => 'vertical',
 
     /**
      * Pick a login page layout.
@@ -162,13 +162,13 @@ return [
     ],
 
     /**
-     * 4th Layer of customization
-     *
-     * Alright, if nothing so far met your need, then you still have an easy way to build
-     * a custom layout using the already existing components of this theme.
-     *
-     * 1. Create a new blade file in resources/views/layouts/your-custom-layout.blade.php
-     * 2. Replace the value of layout on this file with "your-custom-layout"
-     * 3. Customize the blade and place components such as sidebar, header, top-bar, where you need them!
-     */
+ * 4th Layer of customization
+ *
+ * Alright, if nothing so far met your need, then you still have an easy way to build
+ * a custom layout using the already existing components of this theme.
+ *
+ * 1. Create a new blade file in resources/views/layouts/your-custom-layout.blade.php
+ * 2. Replace the value of layout on this file with "your-custom-layout"
+ * 3. Customize the blade and place components such as sidebar, header, top-bar, where you need them!
+ */
 ];

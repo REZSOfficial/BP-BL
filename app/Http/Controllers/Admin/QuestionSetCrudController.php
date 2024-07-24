@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Answer;
+use App\Models\Question;
+use App\Models\QuestionSet;
+use Illuminate\Http\Request;
 use App\Http\Requests\QuestionSetRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -32,6 +36,7 @@ class QuestionSetCrudController extends CrudController
 
         CRUD::setListView('vendor.backpack.crud.questionset.list');
         CRUD::setShowView('vendor.backpack.crud.questionset.show');
+        //CRUD::setCreateView('vendor.backpack.crud.questionset.create');
     }
 
     protected function setupShowOperation()
@@ -78,6 +83,12 @@ class QuestionSetCrudController extends CrudController
         CRUD::setValidation(QuestionSetRequest::class);
         CRUD::setFromDb(); // set fields from db columns.
 
+        CRUD::addField([
+            'name' => 'questions',
+            'type' => 'questions',
+            'label' => 'Questions'
+        ]);
+
         /**
          * Fields can be defined using the fluent syntax:
          * - CRUD::field('price')->type('number');
@@ -93,5 +104,48 @@ class QuestionSetCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    protected function store()
+    {
+        $this->crud->hasAccessOrFail('create');
+
+        $request = $this->crud->getRequest();
+        $questionsData = $request->get('questions', []);
+
+        // Validate request data
+        //$this->validate($request, QuestionSetRequest::class);
+
+        // Create question set
+        $questionSet = QuestionSet::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'active_from' => $request->active_from,
+            'active_to' => $request->active_to,
+        ]);
+
+        // Create questions and answers
+        $this->saveQuestions($questionSet->id, $questionsData);
+
+        return $this->crud->performSaveAction('create');
+    }
+
+    protected function saveQuestions($questionSetId, $questionsData)
+    {
+        // Create new questions and answers
+        foreach ($questionsData as $questionData) {
+            $question = Question::create([
+                'question_set_id' => $questionSetId,
+                'question' => $questionData['question'],
+            ]);
+
+            foreach ($questionData['answers'] as $answerData) {
+                Answer::create([
+                    'question_id' => $question->id,
+                    'answer' => $answerData['answer'],
+                    'is_correct' => isset($answerData['is_correct']) ? 1 : 0,
+                ]);
+            }
+        }
     }
 }

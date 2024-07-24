@@ -118,7 +118,6 @@ $breadcrumbs = $breadcrumbs ?? $defaultBreadcrumbs;
                             {!! $column['label'] !!}
                         </th>
                         @endforeach
-
                         @if ( $crud->buttons()->where('stack', 'line')->count() )
                         <th data-orderable="false" data-priority="{{ $crud->getActionsColumnPriority() }}"
                             data-visible-in-export="false" data-action-column="true">{{ trans('backpack::crud.actions')
@@ -155,7 +154,6 @@ $breadcrumbs = $breadcrumbs ?? $defaultBreadcrumbs;
             <div id="datatable_button_stack" class="float-right text-right hidden-xs"></div>
         </div>
         @endif
-
     </div>
 
 </div>
