@@ -56,8 +56,6 @@ class QuestionSetCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        //CRUD::setFromDb(); // set columns from db columns.
-
         CRUD::column('title')->type('text')->label('Név');
         CRUD::column('description')->type('text')->label('Leírás');
         CRUD::column('active_from')->type('date')->label('Aktív ettől');
@@ -82,8 +80,8 @@ class QuestionSetCrudController extends CrudController
 
         CRUD::field('title')->label('Cím');
         CRUD::field('description')->label('Leírás');
-        CRUD::field('active_from')->label('Aktív dátumtól')->type('date');
-        CRUD::field('active_to')->label('Aktív dátumig')->type('date');
+        CRUD::field('active_from')->label('Aktív ettől')->type('date');
+        CRUD::field('active_to')->label('Aktív eddig')->type('date');
 
         CRUD::addField([
             'name' => 'questions',

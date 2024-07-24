@@ -1,5 +1,5 @@
 @php
-$questions = $entry->questions->pluck('question', 'id')->toArray();
+$questions = $entry->questions;
 @endphp
 
 <span class="d-flex flex-row">
@@ -9,15 +9,16 @@ $questions = $entry->questions->pluck('question', 'id')->toArray();
             Kérdések
         </button>
         <ul class="dropdown-menu">
-            @foreach($questions as $id => $question)
+            @foreach($questions as $question)
             <li class="dropdown-item">
-                <a href="{{route('question.show', $id)}}">
-                    {{ $question }}
+                <a href="{{route('question.show', $question->id)}}">
+                    {{ $question->question }}
                 </a>
             </li>
             @endforeach
             <li>
-                <a class="btn btn-dark w-100" href="{{route('question.create')}}">Kérdés hozzáadása</a>
+                <a class="btn btn-dark w-100" href="{{route('question-set.edit', $question->question_set_id)}}">Kérdés
+                    hozzáadása</a>
             </li>
         </ul>
     </div>

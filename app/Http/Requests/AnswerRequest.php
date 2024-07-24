@@ -25,7 +25,9 @@ class AnswerRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'question_id' => 'required',
+            'answer' => 'required|max:255',
+            'is_correct' => 'boolean',
         ];
     }
 
