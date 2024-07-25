@@ -127,8 +127,41 @@ class QuestionSetCrudController extends CrudController
         return $this->crud->performSaveAction('create');
     }
 
+    protected function update()
+    {
+        $this->crud->hasAccessOrFail('update');
+
+        $request = app(QuestionSetRequest::class);
+
+        $request = $this->crud->getRequest();
+
+        $questionsData = $request->get('questions', []);
+
+        // Update question set
+        $questionSet = QuestionSet::find($this->crud->getCurrentEntry()->id);
+        $questionSet->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'active_from' => $request->active_from,
+            'active_to' => $request->active_to,
+        ]);
+
+        // Update questions and answers
+        $this->saveQuestions($questionSet->id, $questionsData);
+
+        return $this->crud->performSaveAction('update');
+    }
+
     protected function saveQuestions($questionSetId, $questionsData)
     {
+        // Delete all questions and answers
+        Question::where('question_set_id', $questionSetId)->delete();
+        Answer::where('question_id', 'IN', function ($query) use ($questionSetId) {
+            $query->select('id')
+                ->from('questions')
+                ->where('question_set_id', $questionSetId);
+        })->delete();
+
         // Create new questions and answers
         foreach ($questionsData as $questionData) {
             $question = Question::create([
