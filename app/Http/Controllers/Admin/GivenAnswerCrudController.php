@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\GivenAnswerRequest;
+use App\Models\GivenAnswer;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class GivenAnswerCrudController
@@ -40,10 +42,10 @@ class GivenAnswerCrudController extends CrudController
             ->join('questions', 'given_answers.question_id', '=', 'questions.id')
             ->join('question_sets', 'questions.question_set_id', '=', 'question_sets.id')
             ->join('answers', 'given_answers.answer_id', '=', 'answers.id')
-            ->select('given_answers.name as username', 'given_answers.phone as phone', 'given_answers.email as email', 'question_sets.id as questionset_id', 'question_sets.title as questionset_title')
+            ->select('given_answers.name as username', 'given_answers.phone as phone', 'given_answers.email as email', 'given_answers.created_at as created_at', 'question_sets.id as questionset_id', 'question_sets.title as questionset_title')
             ->selectRaw('COUNT(CASE WHEN answers.is_correct THEN 1 END) as correct_answers')
             ->selectRaw('COUNT(given_answers.id) as total_answers')
-            ->groupBy('given_answers.name', 'given_answers.phone', 'given_answers.email', 'question_sets.id', 'question_sets.title')
+            ->groupBy('given_answers.name', 'given_answers.phone', 'given_answers.created_at', 'given_answers.email', 'question_sets.id', 'question_sets.title')
             ->get();
 
         return view('vendor.backpack.crud.givenanswer.list', ['data' => $data]);
@@ -85,5 +87,42 @@ class GivenAnswerCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    protected function store()
+    {
+        $this->crud->hasAccessOrFail('create');
+
+        $request = app(GivenAnswerRequest::class);
+
+        $request = $this->crud->getRequest();
+
+        $data = [
+            'name' => $request['name'],
+            'phone' => $request['phone'],
+            'email' => $request['email'],
+            'question_id' => $request['question_id'],
+            'answer_id' => $request['answer_id'],
+            'created_at' => now(),
+        ];
+
+        // Create given answer
+        GivenAnswer::create($data);
+
+        // Define the path to the JSON file
+        $filePath = Storage::disk('local')->path('/public/given_answers.json');
+
+        $json = [];
+
+        // Check if the file exists and read its contents
+        if (file_exists($filePath)) {
+            $json = json_decode(file_get_contents($filePath), true);
+        }
+
+        // Append the new data
+        $json[] = $data;
+        file_put_contents($filePath, json_encode($json, JSON_PRETTY_PRINT));
+
+        return $this->crud->performSaveAction('create');
     }
 }

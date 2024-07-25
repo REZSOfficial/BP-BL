@@ -26,6 +26,7 @@
                     <th>Kérdéssor</th>
                     <th>Helyes</th>
                     <th>Összes</th>
+                    <th>Időpont</th>
                 </tr>
                 <tr>
                     <th><input class="form-control" type="text" placeholder="Szűrés név szerint"></th>
@@ -34,6 +35,7 @@
                     <th><input class="form-control" type="text" placeholder="Szűrés kérdéssor szerint"></th>
                     <th><input class="form-control" type="text" placeholder="Szűrés helyes válaszok szerint"></th>
                     <th></th>
+                    <th><input class="form-control" type="text" placeholder="Szűrés idő szerint"></th>
                 </tr>
             </thead>
             <tbody>
@@ -50,6 +52,7 @@
                     <td>
                         <span class="badge bg-info">{{ $row->total_answers }}</span>
                     </td>
+                    <td>{{ $row->created_at }}</td>
                 </tr>
                 @empty
                 <tr>
