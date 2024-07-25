@@ -3,7 +3,7 @@
 @section('header')
 <section class="header-operation container-fluid animated fadeIn d-flex mb-2 align-items-baseline d-print-none"
     bp-section="page-header">
-    <h1>Helyes Válaszok</h1>
+    <h1>Adott válaszok</h1>
 </section>
 @endsection
 
@@ -20,9 +20,16 @@
                     <th>Kérdéssor</th>
                     <th><i class="la la-check text-success"></i></th>
                 </tr>
+                <tr>
+                    <th><input class="form-control" type="text" placeholder="Szűrés név szerint"></th>
+                    <th><input class="form-control" type="text" placeholder="Szűrés e-mail szerint"></th>
+                    <th><input class="form-control" type="text" placeholder="Szűrés telefon szerint"></th>
+                    <th><input class="form-control" type="text" placeholder="Szűrés kérdéssor szerint"></th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
-                @foreach ($data as $row)
+                @forelse ($data as $row)
                 <tr class="h3">
                     <td>{{ $row->username }}</td>
                     <td>{{ $row->email }}</td>
@@ -30,14 +37,46 @@
                     <td><a href="{{ route('question-set.show', $row->questionset_id) }}">{{ $row->questionset_title
                             }}</a></td>
                     <td>
-                        <span class=" badge bg-success">{{ $row->correct_answers }}</span>
+                        <span class="badge bg-success">{{ $row->correct_answers }}</span>
                         <span>/</span>
-                        <span class=" badge bg-info">{{ $row->total_answers }}</span>
+                        <span class="badge bg-info">{{ $row->total_answers }}</span>
                     </td>
                 </tr>
-                @endforeach
+                @empty
+                <tr>
+                    <td colspan="5">Nincsenek adatok.</td>
+                </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
 </div>
+@endsection
+
+@section('before_styles')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+@endsection
+
+@section('after_scripts')
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Initialize DataTable
+        var table = $('#crudTable').DataTable();
+
+        // Apply the search
+        table.columns().every(function() {
+            var that = this;
+
+            $('input', this.header()).on('keyup change clear', function() {
+                if (that.search() !== this.value) {
+                    that
+                        .search(this.value)
+                        .draw();
+                }
+            });
+        });
+    });
+</script>
 @endsection
