@@ -26,6 +26,10 @@ class QuestionCrudController extends CrudController
      */
     public function setup()
     {
+        if (!backpack_user()->hasRole('admin')) {
+            abort(403);
+        }
+
         CRUD::setModel(\App\Models\Question::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/question');
         CRUD::setEntityNameStrings('question', 'questions');
