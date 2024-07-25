@@ -158,29 +158,31 @@ class QuestionSetCrudController extends CrudController
     protected function saveQuestions($questionSetId, $questionsData)
     {
         // Delete all questions and answers
-        Question::where('question_set_id', $questionSetId)->delete();
-        Answer::where('question_id', 'IN', function ($query) use ($questionSetId) {
+        Answer::whereIn('question_id', function ($query) use ($questionSetId) {
             $query->select('id')
                 ->from('questions')
                 ->where('question_set_id', $questionSetId);
         })->delete();
 
+        Question::where('question_set_id', $questionSetId)->delete();
+
         // Create new questions and answers
-        foreach ($questionsData as $questionData) {
+        foreach ($questionsData as $qIndex => $questionData) {
             $question = Question::create([
                 'question_set_id' => $questionSetId,
                 'question' => $questionData['question'],
             ]);
 
-            foreach ($questionData['answers'] as $answerData) {
+            foreach ($questionData['answers'] as $index => $answerData) {
                 Answer::create([
                     'question_id' => $question->id,
                     'answer' => $answerData['answer'],
-                    'is_correct' => isset($answerData['is_correct']) ? 1 : 0,
+                    'is_correct' => ($questionData['is_correct'] == $index) ? 1 : 0,
                 ]);
             }
         }
     }
+
 
     public function setDates(Request $request, $id)
     {
