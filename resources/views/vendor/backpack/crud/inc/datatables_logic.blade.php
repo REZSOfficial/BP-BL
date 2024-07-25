@@ -1,21 +1,21 @@
- @php
-    // as it is possible that we can be redirected with persistent table we save the alerts in a variable
-    // and flush them from session, so we will get them later from localStorage.
-    $backpack_alerts = \Alert::getMessages();
-    \Alert::flush();
- @endphp
+@php
+// as it is possible that we can be redirected with persistent table we save the alerts in a variable
+// and flush them from session, so we will get them later from localStorage.
+$backpack_alerts = \Alert::getMessages();
+\Alert::flush();
+@endphp
 
-  {{-- DATA TABLES SCRIPT --}}
-  @basset('https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js')
-  @basset('https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js')
-  @basset('https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js')
-  @basset('https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css')
-  @basset('https://cdn.datatables.net/fixedheader/3.3.1/js/dataTables.fixedHeader.min.js')
-  @basset('https://cdn.datatables.net/fixedheader/3.3.1/css/fixedHeader.dataTables.min.css')
+{{-- DATA TABLES SCRIPT --}}
+@basset('https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js')
+@basset('https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js')
+@basset('https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js')
+@basset('https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css')
+@basset('https://cdn.datatables.net/fixedheader/3.3.1/js/dataTables.fixedHeader.min.js')
+@basset('https://cdn.datatables.net/fixedheader/3.3.1/css/fixedHeader.dataTables.min.css')
 
-  @basset(base_path('vendor/backpack/crud/src/resources/assets/img/spinner.svg'), false)
+@basset(base_path('vendor/backpack/crud/src/resources/assets/img/spinner.svg'), false)
 
-  <script>
+<script>
     // here we will check if the cached dataTables paginator length is conformable with current paginator settings.
     // datatables caches the ajax responses with pageLength in LocalStorage so when changing this
     // settings in controller users get unexpected results. To avoid that we will reset
@@ -238,7 +238,7 @@
               "loadingRecords": "{{ trans('backpack::crud.loadingRecords') }}",
               "processing":     "<img src='{{ Basset::getUrl('vendor/backpack/crud/src/resources/assets/img/spinner.svg') }}' alt='{{ trans('backpack::crud.processing') }}'>",
               "search": "_INPUT_",
-              "searchPlaceholder": "{{ trans('backpack::crud.search') }}...",
+              "searchPlaceholder": "Keresés...",
               "zeroRecords":    "{{ trans('backpack::crud.zeroRecords') }}",
               "paginate": {
                   "first":      "{{ trans('backpack::crud.paginate.first') }}",
@@ -278,10 +278,10 @@
             "<'table-footer row mt-2 d-print-none align-items-center '<'col-sm-12 col-md-4'l><'col-sm-0 col-md-4 text-center'B><'col-sm-12 col-md-4 'p>>",
       }
   }
-  </script>
-  @include('crud::inc.export_buttons')
+</script>
+@include('crud::inc.export_buttons')
 
-  <script type="text/javascript">
+<script type="text/javascript">
     jQuery(document).ready(function($) {
 
       window.crud.table = $("#crudTable").DataTable(window.crud.dataTableConfiguration);
@@ -423,6 +423,6 @@
             actionCell.prepend('<a class="btn btn-sm px-2 py-1 btn-outline-primary dropdown-toggle actions-buttons-column" href="#" data-toggle="dropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">{{ trans('backpack::crud.actions') }}</a>');
         });
     }
-  </script>
+</script>
 
-  @include('crud::inc.details_row_logic')
+@include('crud::inc.details_row_logic')

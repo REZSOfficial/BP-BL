@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('given_answers', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->required();
+            $table->string('phone')->required();
+            $table->string('email')->required();
+            $table->foreignId('question_id')->constrained('questions')->onDelete('cascade');
+            $table->foreignId('answer_id')->constrained('answers')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -21,11 +21,7 @@ $questions = old('questions', $entry->questions ?? []);
 @push('crud_fields_scripts')
 <script>
     $(document).ready(function() {
-            let questionIndex = {
-                {
-                    count($questions)
-                }
-            };
+            let questionIndex = {{ count($questions) }};
             const questionsWrapper = $('#questions-wrapper');
 
             $('#add-question').click(function() {

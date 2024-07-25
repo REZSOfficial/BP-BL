@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\GivenAnswerCrudController;
 
 // --------------------------
 // Custom Backpack Routes
@@ -19,4 +20,6 @@ Route::group([
     Route::crud('question-set', 'QuestionSetCrudController');
     Route::crud('question', 'QuestionCrudController');
     Route::crud('answer', 'AnswerCrudController');
+    Route::crud('given-answer', 'GivenAnswerCrudController');
+    Route::get('givenanswers', [GivenAnswerCrudController::class, 'showGivenAnswers'])->name('givenanswers');
 }); // this should be the absolute last line of this file

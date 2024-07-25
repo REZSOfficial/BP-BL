@@ -108,6 +108,7 @@ class QuestionSetCrudController extends CrudController
         $this->crud->hasAccessOrFail('create');
 
         $request = app(QuestionSetRequest::class);
+
         $request = $this->crud->getRequest();
 
         $questionsData = $request->get('questions', []);

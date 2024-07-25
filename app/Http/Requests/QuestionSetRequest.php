@@ -17,6 +17,23 @@ class QuestionSetRequest extends FormRequest
         return backpack_auth()->check();
     }
 
+    protected function prepareForValidation()
+    {
+        $questions = $this->input('questions', []);
+
+        foreach ($questions as &$question) {
+            if (isset($question['answers'])) {
+                foreach ($question['answers'] as &$answer) {
+                    // Ensure 'is_correct' is always true or false
+                    $answer['is_correct'] = !empty($answer['is_correct']);
+                }
+            }
+        }
+
+        // Merge the modified questions back into the request data
+        $this->merge(['questions' => $questions]);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
