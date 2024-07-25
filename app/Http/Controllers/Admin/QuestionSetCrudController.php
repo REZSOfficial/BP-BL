@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Answer;
 use App\Models\Question;
 use App\Models\QuestionSet;
+use Illuminate\Http\Request;
 use App\Http\Requests\QuestionSetRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -66,6 +67,8 @@ class QuestionSetCrudController extends CrudController
             'label' => 'Kérdések',
             'type' => 'custom_question_column',
         ]);
+
+        CRUD::addButtonFromView('line', 'set_active_dates', 'set_active_dates', 'end');
     }
 
     /**
@@ -177,5 +180,21 @@ class QuestionSetCrudController extends CrudController
                 ]);
             }
         }
+    }
+
+    public function setDates(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'active_from' => 'required|date',
+            'active_to' => 'required|date',
+        ]);
+
+        $questionSet = QuestionSet::find($id);
+
+        $questionSet->active_from = $validated['active_from'];
+        $questionSet->active_to = $validated['active_to'];
+        $questionSet->save();
+
+        return redirect()->back();
     }
 }

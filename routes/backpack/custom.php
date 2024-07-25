@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\GivenAnswerCrudController;
+use App\Http\Controllers\Admin\QuestionSetCrudController;
 
 // --------------------------
 // Custom Backpack Routes
@@ -22,4 +23,5 @@ Route::group([
     Route::crud('answer', 'AnswerCrudController');
     Route::crud('given-answer', 'GivenAnswerCrudController');
     Route::get('givenanswers', [GivenAnswerCrudController::class, 'showGivenAnswers'])->name('givenanswers');
+    Route::post('/admin/question-sets/{id}/set-dates', [QuestionSetCrudController::class, 'setDates'])->name('set-dates');
 }); // this should be the absolute last line of this file
