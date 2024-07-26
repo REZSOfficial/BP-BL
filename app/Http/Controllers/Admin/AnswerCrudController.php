@@ -60,8 +60,34 @@ class AnswerCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(AnswerRequest::class);
-        CRUD::setFromDb(); // set fields from db columns.
 
+        CRUD::addField([
+            'name' => 'question_id',
+            'type' => 'select',
+            'label' => 'Kérdés',
+            'entity' => 'question',
+            'model' => "App\Models\Question",
+            'attribute' => 'question',
+            'options'   => (function ($query) {
+                return $query->orderBy('question', 'ASC')->get();
+            }),
+        ]);
+
+        CRUD::addField([
+            'name' => 'answer',
+            'type' => 'text',
+            'label' => 'Válasz',
+        ]);
+
+        CRUD::addField([
+            'name' => 'is_correct',
+            'type' => 'checkbox',
+            'label' => 'Helyes',
+            'options' => [
+                '1' => 'Igen',
+                '0' => 'Nem',
+            ],
+        ]);
         /**
          * Fields can be defined using the fluent syntax:
          * - CRUD::field('price')->type('number');

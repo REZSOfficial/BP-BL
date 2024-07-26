@@ -56,7 +56,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="5">Nincsenek adatok.</td>
+                    <td colspan="7" class="text-center">Nincsenek adatok.</td>
                 </tr>
                 @endforelse
             </tbody>
