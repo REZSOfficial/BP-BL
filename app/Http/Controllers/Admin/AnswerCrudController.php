@@ -43,12 +43,26 @@ class AnswerCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::setFromDb(); // set columns from db columns.
+        CRUD::addColumn([
+            'name' => 'question_id',
+            'type' => 'text',
+            'label' => 'Kérdés',
+            'entity' => 'question',
+            'attribute' => 'question',
+            'model' => "App\Models\Question",
+        ]);
 
-        /**
-         * Columns can be defined using the fluent syntax:
-         * - CRUD::column('price')->type('number');
-         */
+        CRUD::addColumn([
+            'name' => 'answer',
+            'type' => 'text',
+            'label' => 'Válasz',
+        ]);
+
+        CRUD::addColumn([
+            'name' => 'is_correct',
+            'type' => 'checkbox',
+            'label' => 'Helyes',
+        ]);
     }
 
     /**

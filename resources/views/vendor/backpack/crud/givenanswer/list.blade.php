@@ -9,7 +9,7 @@
 
 @section('content')
 <div class="row" bp-section="crud-operation-list">
-    <div class="col-md-12 d-flex border gap-3 justify-content-between">
+    <div class="col-md-12 d-flex  gap-3 justify-content-between">
         <button id="copyButton" class="btn btn-primary mb-3 w-full">Másolás</button>
         <button id="exportButton" class="btn btn-primary mb-3 w-full">Excel</button>
         <button id="printButton" class="btn btn-primary mb-3 w-full">Nyomtatás</button>
