@@ -10,3 +10,4 @@ Route::get('/', function () {
 
 Route::get('/kviz', [FrontendController::class, 'index'])->name('kviz.index');
 Route::post('/api/vote', [FrontendController::class, 'vote'])->name('kviz.vote');
+Route::post('/api/data', [FrontendController::class, 'data'])->name('kviz.data');

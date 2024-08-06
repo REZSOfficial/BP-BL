@@ -1,8 +1,11 @@
 @extends('components.layout')
 
 @section('content')
+<div class="text-center alert invisible">
+    <p>Töltse ki az összes választ.</p>
+</div>
 <div>
-    <img class="object-fit-cover" id="quiz-img" src="https://picsum.photos/seed/1440/616" alt="Kviz kép" width="100%"
+    <img class="object-fit-cover" id="quiz-img" src="https://picsum.photos/1440/616" alt="Kviz kép" width="100%"
         height="616px">
 </div>
 <div class="quiz">
@@ -24,7 +27,7 @@
         </svg>
     </div>
 
-    <form method="POST" id="quiz-form">
+    <form method="POST" id="quiz-form" class="quiz-form">
         <!-- Kérdések -->
         @foreach ($question_set->questions as $question)
         <h2>
@@ -34,8 +37,8 @@
         <div class="answers">
             @foreach ($question->answers as $answer)
             <div class="answer">
-                <input type="radio" name="{{" answer[{$question->id}]"}}" value="{{$answer->id}}">
-                <label for="answer[{{$question->id}}][{{$answer->id}}]">{{$answer->answer}}</label>
+                <input type="radio" id="{{$question->id}}" name="question[{{$question->id}}]" value="{{$answer->id}}">
+                <label for="{{$question->id}}">{{$answer->answer}}</label>
             </div>
             @endforeach
         </div>
@@ -48,14 +51,22 @@
     function handleVote() {
         event.preventDefault();
         $.ajax({
-            url: "/api/vote",
+            url: "/api/data",
             type: "POST",
             data: $('#quiz-form').serialize(),
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(data) {
-                console.log(data);
+                $(".quiz").html(data);
+            },
+            error: function(data) {
+                $(".alert").removeClass("invisible");
+                $(".alert").fadeIn();
+
+                setTimeout(() => {
+                        $(".alert").fadeOut();
+                }, 5000);
             }
         });
     }
