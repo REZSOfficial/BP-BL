@@ -46,9 +46,9 @@ class QuestionSetRequest extends FormRequest
             'description' => 'required|max:255',
             'active_from' => 'date|nullable',
             'active_to' => 'date|nullable',
-            'questions' => 'array',
+            'questions' => 'required|array',
             'questions.*.question' => 'required|string',
-            'questions.*.answers' => 'array',
+            'questions.*.answers' => 'requried|array',
             'questions.*.answers.*.answer' => 'required|string',
             'questions.*.answers.*.is_correct' => 'boolean',
         ];

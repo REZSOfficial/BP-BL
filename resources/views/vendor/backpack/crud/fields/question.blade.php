@@ -2,7 +2,7 @@
     <div class="card-body">
         <div class="form-group">
             <label for="questions[{{ $index }}][question]">Kérdés</label>
-            <input type="text" name="questions[{{ $index }}][question]" value="{{ $question['question'] }}"
+            <input required type="text" name="questions[{{ $index }}][question]" value="{{ $question['question'] }}"
                 class="form-control">
         </div>
         <div class="card">
