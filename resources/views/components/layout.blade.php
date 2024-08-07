@@ -30,44 +30,8 @@
     <!-- This site is using AdRotate v5.13.2 to display their advertisements - https://ajdg.solutions/ -->
     <!-- AdRotate CSS -->
     <style type="text/css" media="screen">
-        .g {
-            margin: 0px;
-            padding: 0px;
-            overflow: hidden;
-            line-height: 1;
-            zoom: 1;
-        }
-
-        .g img {
-            height: auto;
-        }
-
-        .g-col {
-            position: relative;
-            float: left;
-        }
-
-        .g-col:first-child {
-            margin-left: 0;
-        }
-
-        .g-col:last-child {
-            margin-right: 0;
-        }
-
         footer {
             border-color: #e7e7e7;
-        }
-
-        @media only screen and (max-width: 480px) {
-
-            .g-col,
-            .g-dyn,
-            .g-single {
-                width: 100%;
-                margin-left: 0;
-                margin-right: 0;
-            }
         }
 
         .main {
@@ -80,32 +44,8 @@
             }
         }
     </style>
-    <!-- /AdRotate CSS -->
 
     <nav class="navbar navbar-toggleable-md">
-
-        <div class="mobile-search">
-            <a class="nav-link no-underline search" href="#0"><i class="fa fa-search" aria-hidden="true"></i></a>
-            <form role="search" method="get" class="searchform" action="https://www.sport1tv.hu/">
-                <div class="form-group">
-                    <div class="easy-autocomplete" style="width: 100px;"><input type="text"
-                            class="form-control search-input" name="s" value="" id="eac-7108" autocomplete="off">
-                        <div class="easy-autocomplete-container" id="eac-container-eac-7108">
-                            <ul></ul>
-                        </div>
-                    </div>
-                    <input type="submit" class="form-control">
-                </div>
-            </form>
-        </div>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
-            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="stroke s-1"></span>
-            <span class="stroke s-2"></span>
-            <span class="stroke s-3"></span>
-        </button>
-
         <div class="container">
             <div class="brand-and-categories">
                 <a class="navbar-brand" href="https://www.sport1tv.hu">
@@ -117,7 +57,6 @@
                         src="https://www.sport1tv.hu/wp-content/uploads/2020/10/mobile-logo.svg" alt="">
                 </a>
             </div>
-
 
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                 <ul class="navbar-nav ml-auto">
@@ -144,24 +83,6 @@
                         class="menu-item menu-item-type-custom menu-item-object-custom menu-item-100891 nav-item"><a
                             href="https://amcn-hu.com/sport1tv-klub/?utm_source=Website&amp;utm_medium=AMCNsite&amp;utm_campaign=KlubTab&amp;utm_term=Sport%20TV&amp;utm_content=Tab"
                             class="nav-link">Klub</a>
-                    </li>
-                    <li class="nav-item p-relative hidden-md-down">
-                        <a class="nav-link no-underline search" href="#0">
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </a>
-
-                        <form role="search" method="get" class="searchform" action="https://www.sport1tv.hu/">
-                            <div class="form-group">
-                                <div class="easy-autocomplete" style="width: 24px;"><input type="text"
-                                        class="form-control search-input" name="s" value="" id="eac-2989"
-                                        autocomplete="off">
-                                    <div class="easy-autocomplete-container" id="eac-container-eac-2989">
-                                        <ul></ul>
-                                    </div>
-                                </div>
-                                <input type="submit" class="form-control">
-                            </div>
-                        </form>
                     </li>
 
                     <li class="nav-item hidden-lg-down">
@@ -199,11 +120,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <img class="big-logo img-fluid"
+                    <img class="img-fluid"
                         src="https://www.sport1tv.hu/wp-content/uploads/2021/09/AMCNI_CNE_Horiz_Wht-300x97.png" alt="">
                 </div>
-
-
                 <div class="col-12">
                     <div class="footer-logos">
 

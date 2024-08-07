@@ -22,27 +22,28 @@
     </div>
 
     <h2>Adatok megadása</h2>
-    <div class="answer d-flex flex-column">
-        <label for="name">Név<span class="text-danger">*</span></label>
-        <input class="data-input" type="text" id="name" name="name">
-    </div>
-    <div class="answer d-flex flex-column">
-        <label for="email">Email<span class="text-danger">*</span></label>
-        <input class="data-input" type="text" id="email" name="email">
-    </div>
-    <div class="answer d-flex flex-column">
-        <label for="phone">Telefonszám<span class="text-danger">*</span></label>
-        <input class="data-input" type="number" id="phone" name="phone">
-    </div>
-    <div class="checkbox-container">
-        <div class="answer">
-            <input type="checkbox" id="over18" class="data-checkbox" name="over18">
-            <label class="unset" for="over18">Elmúltam 18 éves<span class="text-danger">*</span></label>
+    <div class="data-input-container">
+        <div class="d-flex flex-column">
+            <label class="data-label" for="name">Név<span class="text-danger">*</span></label>
+            <input class="data-input" type="text" id="name" name="name">
         </div>
-        <div class="answer">
-            <input type="checkbox" id="accept" class="data-checkbox" name="accept">
-            <label class="unset" for="accept">Hozzájárulok az adataim kezeléséhez<span
-                    class="text-danger">*</span></label>
+        <div class="d-flex flex-column">
+            <label class="data-label" for="email">Email<span class="text-danger">*</span></label>
+            <input class="data-input" type="text" id="email" name="email">
+        </div>
+        <div class="d-flex flex-column">
+            <label class="data-label" for="phone">Telefonszám<span class="text-danger">*</span></label>
+            <input class="data-input" type="number" id="phone" name="phone">
+        </div>
+        <div class="d-flex flex-column justify-content-start">
+            <div class="">
+                <input type="checkbox" id="over18" class="data-checkbox" name="over18">
+                <label for="over18">Elmúltam 18 éves<span class="text-danger">*</span></label>
+            </div>
+            <div class="">
+                <input type="checkbox" id="accept" class="data-checkbox" name="accept">
+                <label for="accept">Hozzájárulok az adataim kezeléséhez<span class="text-danger">*</span></label>
+            </div>
         </div>
     </div>
 
@@ -98,37 +99,5 @@
 </script>
 
 <style>
-    .data-input {
-        border: 1px solid #E3E3E3;
-        width: 400px;
-        height: 50px;
-    }
 
-    .data-input:focus {
-        border: 1px solid #000000;
-    }
-
-    .data-checkbox {
-        position: static !important;
-        border: 1px solid #E3E3E3 !important;
-        background-color: white !important;
-        width: 30px !important;
-        height: 30px !important;
-    }
-
-    .data-checkbox:checked {
-        border: 1px solid black;
-    }
-
-    .checkbox-container {
-        display: flex;
-        flex-direction: column;
-        text-align: left;
-    }
-
-    .unset {
-        all: unset !important;
-        font-size: 16px;
-        font-weight: 500;
-    }
 </style>

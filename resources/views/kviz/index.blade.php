@@ -5,8 +5,8 @@
     <p>Töltse ki az összes választ.</p>
 </div>
 <div>
-    <img class="object-fit-cover" id="quiz-img" src="https://picsum.photos/1440/616" alt="Kviz kép" width="100%"
-        height="616px">
+    <img style="object-position: center" class="img-fluid" src="bl-placeholder.jpg" alt="Kviz kép" height="540px"
+        width="100%">
 </div>
 <div class="quiz">
     <h1>KVÍZ</h1>
@@ -27,6 +27,7 @@
         </svg>
     </div>
 
+    @if($question_set)
     <form method="POST" id="quiz-form" class="quiz-form">
         <!-- Kérdések -->
         @foreach ($question_set->questions as $question)
@@ -36,15 +37,19 @@
 
         <div class="answers">
             @foreach ($question->answers as $answer)
-            <div class="answer">
-                <input type="radio" id="{{$question->id}}" name="question[{{$question->id}}]" value="{{$answer->id}}">
-                <label for="{{$question->id}}">{{$answer->answer}}</label>
-            </div>
+            <label for="answer_{{ $answer->id }}" class="answer-label">
+                <input type="radio" id="answer_{{ $answer->id }}" name="question[{{ $question->id }}]"
+                    value="{{ $answer->id }}">
+                <span class="answer-text">{{ $answer->answer }}</span>
+            </label>
             @endforeach
         </div>
         @endforeach
         <button onclick="handleVote()" type="submit" class="btn btn-primary" id="vote-btn">SZAVAZOK</button>
     </form>
+    @else
+    <h1>Jelenleg nem futnak szavazások. Kérjük próbáld meg máskor.</h1>
+    @endif
 </div>
 
 <script>

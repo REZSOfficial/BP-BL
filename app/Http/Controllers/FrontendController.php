@@ -30,18 +30,19 @@ class FrontendController extends Controller
          */
 
         $validated = $request->validate([
-            'question' => 'required',
+            'question' => 'required|array',
+            'question.*' => 'required',
         ]);
 
-        $all_correct = false;
+        $all_correct = true;
 
         foreach ($validated['question'] as $question_id => $answer_id) {
             $question = Question::find($question_id);
             $given_answer = Answer::find($answer_id);
 
             foreach ($question->answers as $answer) {
-                if ($answer->is_correct && $answer->id == $given_answer->id) {
-                    $all_correct = true;
+                if ($answer->is_correct && $answer->id != $given_answer->id) {
+                    $all_correct = false;
                 }
             }
         }
