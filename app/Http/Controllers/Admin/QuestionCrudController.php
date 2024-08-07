@@ -80,7 +80,7 @@ class QuestionCrudController extends CrudController
         CRUD::addField([
             'name' => 'question_set_id',
             'type' => 'select',
-            'label' => 'Question Set',
+            'label' => 'Kérdéssor',
             'entity' => 'questionset',
             'model' => "App\Models\QuestionSet",
             'attribute' => 'title',
@@ -92,7 +92,7 @@ class QuestionCrudController extends CrudController
         CRUD::field([
             'name' => 'question',
             'type' => 'text',
-            'label' => 'Question',
+            'label' => 'Kérdés',
         ]);
     }
 
