@@ -10,8 +10,8 @@
 <x-backpack::menu-item title="Válaszok" icon="la la-tasks" :link="backpack_url('answer')" />
 
 <x-backpack::menu-dropdown title="Admin" icon="la la-cog">
-    <x-backpack::menu-dropdown-item title="Users" icon="la la-user" :link="backpack_url('user')" />
-    <x-backpack::menu-dropdown-item title="Roles" icon="la la-group" :link="backpack_url('role')" />
-    <x-backpack::menu-dropdown-item title="Permissions" icon="la la-key" :link="backpack_url('permission')" />
+    <x-backpack::menu-dropdown-item title="Felhasználók" icon="la la-user" :link="backpack_url('user')" />
+    <x-backpack::menu-dropdown-item title="Szerepek" icon="la la-group" :link="backpack_url('role')" />
+    <x-backpack::menu-dropdown-item title="Engedélyek" icon="la la-key" :link="backpack_url('permission')" />
 </x-backpack::menu-dropdown>
 @endif

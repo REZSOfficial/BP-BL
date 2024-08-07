@@ -31,7 +31,7 @@ class GivenAnswerCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\GivenAnswer::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/given-answer');
-        CRUD::setEntityNameStrings('given answer', 'given answers');
+        CRUD::setEntityNameStrings('adott válasz', 'adott válaszok');
 
         CRUD::setListView('vendor.backpack.crud.givenanswer.list');
     }

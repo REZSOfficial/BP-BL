@@ -63,7 +63,7 @@ class FrontendController extends Controller
 
         $validated = $request->validated();
 
-        if (GivenAnswer::where('name', $validated['name'])->where('email', $validated['email'])->exists()) {
+        if (GivenAnswer::where('phone', $validated['phone'])->exists()) {
             return view('kviz.result', [
                 'all_correct' => $all_correct,
                 'already_submitted' => true,

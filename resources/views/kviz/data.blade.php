@@ -26,23 +26,28 @@
         <div class="d-flex flex-column">
             <label class="data-label" for="name">Név<span class="text-danger">*</span></label>
             <input class="data-input" type="text" id="name" name="name">
+            <p class="input-error" id="name-error"></p>
         </div>
         <div class="d-flex flex-column">
             <label class="data-label" for="email">Email<span class="text-danger">*</span></label>
             <input class="data-input" type="text" id="email" name="email">
+            <p class="input-error" id="email-error"></p>
         </div>
         <div class="d-flex flex-column">
             <label class="data-label" for="phone">Telefonszám<span class="text-danger">*</span></label>
             <input class="data-input" type="number" id="phone" name="phone">
+            <p class="input-error" id="phone-error"></p>
         </div>
-        <div class="d-flex flex-column justify-content-start">
-            <div class="">
+        <div class="d-flex flex-column justify-content-start checkbox-container">
+            <div>
                 <input type="checkbox" id="over18" class="data-checkbox" name="over18">
                 <label for="over18">Elmúltam 18 éves<span class="text-danger">*</span></label>
+                <p class="input-error" id="over18-error"></p>
             </div>
-            <div class="">
+            <div>
                 <input type="checkbox" id="accept" class="data-checkbox" name="accept">
                 <label for="accept">Hozzájárulok az adataim kezeléséhez<span class="text-danger">*</span></label>
+                <p class="input-error" id="accept-error"></p>
             </div>
         </div>
     </div>
@@ -75,22 +80,27 @@
                 
                     if(errors.name){
                         $('#name').addClass('invalid');
+                        $('#name-error').text(errors.name);
                     }
 
                     if(errors.email){
                         $('#email').addClass('invalid');
+                        $('#email-error').text(errors.email);
                     }
 
                     if(errors.phone){
                         $('#phone').addClass('invalid');
+                        $('#phone-error').text(errors.phone);
                     }
 
                     if(errors.over18){
                         $('#over18').addClass('invalid');
+                        $('#over18-error').text(errors.over18);
                     }
 
                     if(errors.accept){
                         $('#accept').addClass('invalid');
+                        $('#accept-error').text(errors.accept);
                     }
                 }
             }

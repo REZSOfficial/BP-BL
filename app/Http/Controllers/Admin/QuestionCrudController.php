@@ -32,7 +32,7 @@ class QuestionCrudController extends CrudController
 
         CRUD::setModel(\App\Models\Question::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/question');
-        CRUD::setEntityNameStrings('question', 'questions');
+        CRUD::setEntityNameStrings('kérdés', 'kérdések');
 
         CRUD::setCreateView('vendor.backpack.crud.question.create');
     }

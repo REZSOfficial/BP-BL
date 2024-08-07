@@ -32,7 +32,7 @@ class QuestionSetCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\QuestionSet::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/question-set');
-        CRUD::setEntityNameStrings('question set', 'question sets');
+        CRUD::setEntityNameStrings('kérdéssor', 'kérdéssorok');
 
         CRUD::setListView('vendor.backpack.crud.questionset.list');
         CRUD::setShowView('vendor.backpack.crud.questionset.show');

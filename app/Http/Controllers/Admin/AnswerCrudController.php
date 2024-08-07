@@ -32,7 +32,7 @@ class AnswerCrudController extends CrudController
 
         CRUD::setModel(\App\Models\Answer::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/answer');
-        CRUD::setEntityNameStrings('answer', 'answers');
+        CRUD::setEntityNameStrings('válasz', 'válaszok');
     }
 
     /**

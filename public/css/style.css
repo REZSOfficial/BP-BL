@@ -118,11 +118,6 @@ h1 {
     text-align: left;
 }
 
-.checkbox-container {
-    display: flex;
-    flex-direction: column;
-}
-
 input[type="checkbox"].data-checkbox {
     opacity: 0;
 }
@@ -151,10 +146,18 @@ input[type="checkbox"].data-checkbox {
     border: 1px solid black;
 }
 
+.input-error {
+    color: #e42e41;
+    font-size: 16px;
+}
+
 .checkbox-container {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
+    margin-left: -30px;
+}
+
+#over18-error,
+#accept-error {
+    margin-left: 30px !important;
 }
 
 @media only screen and (max-width: 600px) {

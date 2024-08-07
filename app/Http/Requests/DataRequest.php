@@ -23,10 +23,29 @@ class DataRequest extends FormRequest
     {
         return [
             'name' => 'required|min:5|max:255',
-            'email' => 'required|email|min:5|max:255',
-            'phone' => 'required|min:5|max:255',
+            'email' => 'required|email',
+            'phone' => 'required',
             'over18' => 'accepted',
             'accept' => 'accepted',
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Kérjük adja meg a nevét.',
+            'name.min' => 'A névnek minimum 5 karatker hosszúnak kell lennie.',
+            'name.max' => 'A névnek maximum 255 karatker hosszúnak kell lennie.',
+            'email.required' => 'Kérjük adja meg az email címét.',
+            'email.email' => 'A megadott email nem helyes.',
+            'phone.required' => 'Kérjük adja meg a telefonszámát.',
+            'over18.accepted' => 'Kötelező.',
+            'accept.accepted' => 'Kötelező.',
         ];
     }
 }

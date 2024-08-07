@@ -1,7 +1,8 @@
 @if ($crud->hasAccess('delete', $entry))
-    <a href="javascript:void(0)" onclick="deleteEntry(this)" data-route="{{ url($crud->route.'/'.$entry->getKey()) }}" class="btn btn-sm btn-link" data-button-type="delete">
-        <span><i class="la la-trash"></i> {{ trans('backpack::crud.delete') }}</span>
-    </a>
+<a href="javascript:void(0)" onclick="deleteEntry(this)" data-route="{{ url($crud->route.'/'.$entry->getKey()) }}"
+	class="btn btn-sm btn-link" data-button-type="delete">
+	<span><i class="la la-trash"></i>Törlés</span>
+</a>
 @endif
 
 {{-- Button Javascript --}}
@@ -10,7 +11,6 @@
 @push('after_scripts') @if (request()->ajax()) @endpush @endif
 @bassetBlock('backpack/crud/buttons/delete-button-'.app()->getLocale().'.js')
 <script>
-
 	if (typeof deleteEntry != 'function') {
 	  $("[data-button-type=delete]").unbind('click');
 
